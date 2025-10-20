@@ -61,7 +61,11 @@ kafka:
 
 namespace:
 
-authentication: {}
+authentication:
+  clientId: admin
+  clientSecret: adminpassword
+  securityProtocol: SASL_PLAINTEXT
+  saslMechanism: SCRAM-SHA-512
 
 authorization: simple
 
