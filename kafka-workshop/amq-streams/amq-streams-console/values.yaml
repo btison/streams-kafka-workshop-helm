@@ -5,12 +5,12 @@ namespace:
 hostName:
 
 kafka:
-  name: kafka
+  name: kafka-secure
   namespace: 
   listener: tls
   authentication:
-    saslMechanism: 
-  authorization: 
+    saslMechanism: SCRAM-SHA-512
+  authorization: simple
 
 argocd:
   syncwave:
