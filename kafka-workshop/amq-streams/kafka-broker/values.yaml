@@ -1,4 +1,4 @@
-nameOverride: "kafka"
+nameOverride: "kafka-secure"
 
 kafka:
   version: 4.0.0
