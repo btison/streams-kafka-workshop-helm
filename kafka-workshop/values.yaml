@@ -7,6 +7,10 @@ workshop:
     source:
       repoUrl: https://github.com/streams-kafka-workshop/helm.git
       targetRevision: main
+  amqstreams_secure:
+    source:
+      repoUrl: https://github.com/btison/streams-kafka-workshop-helm.git
+      targetRevision: kafka-secure
   keycloak:
     source:
       repoUrl: https://github.com/streams-kafka-workshop/helm.git
@@ -21,6 +25,8 @@ workshop:
     gitops:
       syncwave: "-1" 
     amqstreams:
+      syncwave: "0"
+    amqstreams-secure:
       syncwave: "0"
     keycloak:
       syncwave: "-1"

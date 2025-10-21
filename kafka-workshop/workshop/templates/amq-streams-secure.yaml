@@ -1,0 +1,42 @@
+{{- if .Values.amqstreams_secure.enabled -}}
+{{- range untilStep 0 (.Values.loop.count | int64 | int) 1 }}
+{{ $loop := printf "%s%s" $.Values.loop.prefix ((add . 1) | toString) }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ $.Values.amqstreams_secure.applicationName }}-{{ $loop }}
+  namespace: {{ $.Values.amqstreams_secure.applicationNamespace }}-{{ $loop }}
+  annotations:
+    {{- include "workshop.amqstreams-secure.argocd-syncwave" $ | nindent 4 }}
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io/foreground
+spec:
+  destination:
+    name: ""
+    namespace: {{ $.Values.amqstreams_secure.destinationNamespace }}-{{ $loop }}
+    server: 'https://kubernetes.default.svc'
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m0s
+      limit: 10
+    syncOptions:
+      - CreateNamespace=true
+      - RespectIgnoreDifferences=true
+  source:
+    repoURL: {{ $.Values.amqstreams_secure.source.repoUrl }}
+    targetRevision: {{ $.Values.amqstreams_secure.source.targetRevision }}
+    path: {{ $.Values.amqstreams_secure.source.path }}
+    helm:
+      valuesObject:
+        amq-streams-console: 
+          hostName: amq-streams-secure-console-{{ $loop }}.{{ $.Values.subDomain }}
+{{- end }}
+{{- end }}

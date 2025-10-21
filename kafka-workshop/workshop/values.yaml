@@ -50,6 +50,16 @@ amqstreams:
     targetRevision:
     path: kafka-workshop/amq-streams
 
+amqstreams_secure:
+  enabled: true
+  applicationName: amq-streams-secure
+  applicationNamespace: gitops
+  destinationNamespace: kafka-secure
+  source:
+    repoUrl:
+    targetRevision:
+    path: kafka-workshop/amq-streams
+
 globex:
   applicationName: globex
   applicationNamespace: gitops
@@ -62,6 +72,7 @@ globex:
 namespaces:
   - name: kafka
   - name: globex
+  - name: kafka-secure
 
 argocd:
   enabled: true
@@ -75,3 +86,5 @@ argocd:
     syncwave: "-1"
   globex:
     syncwave: "1"
+  amqstreams_secure:
+    syncwave: "0"

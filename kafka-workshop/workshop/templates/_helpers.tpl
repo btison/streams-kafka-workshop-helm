@@ -109,6 +109,21 @@ argocd.argoproj.io/sync-wave: "{{ .Values.argocd.amqstreams.syncwave }}"
 {{/*
 ArgoCD Syncwave
 */}}
+{{- define "workshop.amqstreams-secure.argocd-syncwave" -}}
+{{- if .Values.argocd }}
+{{- if and (.Values.argocd.amqstreams_secure) (.Values.argocd.amqstreams_secure.syncwave) (.Values.argocd.enabled) -}}
+argocd.argoproj.io/sync-wave: "{{ .Values.argocd.amqstreams_secure.syncwave }}"
+{{- else }}
+{{- "{}" }}
+{{- end }}
+{{- else }}
+{{- "{}" }}
+{{- end }}
+{{- end }}
+
+{{/*
+ArgoCD Syncwave
+*/}}
 {{- define "workshop.keycloak.argocd-syncwave" -}}
 {{- if .Values.argocd }}
 {{- if and (.Values.argocd.keycloak) (.Values.argocd.keycloak.syncwave) (.Values.argocd.enabled) -}}
