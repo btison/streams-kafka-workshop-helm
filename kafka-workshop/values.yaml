@@ -21,8 +21,8 @@ workshop:
       targetRevision: main
   globex_cdc:
     source:
-      repoUrl: https://github.com/streams-kafka-workshop/helm.git
-      targetRevision: main
+      repoUrl: https://github.com/btison/streams-kafka-workshop-helm.git
+      targetRevision: cdc
   argocd:
     namespace:
       syncwave: "-1"
